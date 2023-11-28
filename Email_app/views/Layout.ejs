@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin-left: 200px; 
+      margin-right: 200px;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input, a {
+      border-radius: 5px;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 200px;
+      height: 30px;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border: none;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    a {
+      text-decoration: none;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    a:hover {
+      background-color: #45a049;
+    }
+    h1 {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 2em;
+      color: green;
+    }
+    .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  height: 60px; 
+  border: 1px solid black;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.header h1 {
+  position: absolute; 
+  left: 50%; 
+  transform: translateX(-50%); 
+}
+
+.header a {
+  margin-right: 10px;
+  margin-left: auto;
+}
+
+
+
+.menu {
+  position: fixed;
+  left: 0;
+  top: 60px; 
+  width: 200px;
+  height: calc(100% - 60px); 
+  background-color: rgb(247, 248, 235);
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  padding: 10px 0;
+  border-right:  1px solid black;
+
+}
+
+.menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+    .menu a:hover {
+      background-color: #ddd;
+    }
+    .content {
+      margin-left: 210px;
+      margin-right: 10px; 
+      padding-top: 60px;
+      width: calc(100% - 220px); 
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      let headerHeight = document.querySelector('.header').offsetHeight;
+      let menu = document.querySelector('.menu');
+      menu.style.top = headerHeight + 'px';
+    }
+  </script>
+<body>
+  <div class="header">
+    <h1><%= title %></h1>
+    <a href="/signout">Sign Out</a>
+  </div>
+  <div class="menu">
+    <a href="/inbox">Inbox</a>
+    <a href="/compose">Compose</a>
+    <a href="/outbox">Outbox</a>
+  </div>
+  <div class="content">
+    <%- include(body) %>
+  </div>
+</body>
+</html>

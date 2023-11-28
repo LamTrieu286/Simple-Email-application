@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign In</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 50px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      input, a {
+        border-radius: 5px;
+      }
+      input[type="email"], input[type="password"] {
+        width: 200px;
+        height: 30px;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border: none;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      a {
+        text-decoration: none;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      a:hover {
+        background-color: #45a049;
+      }
+      h1 {
+        font-size: 4em;
+        color: rgb(109, 109, 121);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sign In</h1>
+      <p id="error" style="color: red"></p>
+      <form name="signin" action="/signin" method="POST">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <input type="submit" value="Sign In" />
+      </form>
+      <% if (typeof message !== 'undefined') { %>
+      <p><%= message %></p>
+      <% } %>
+      <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+    </div>
+  </body>
+</html>

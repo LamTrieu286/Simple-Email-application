@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Details</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      font-size: 2em; 
+    }
+    .email-container {
+      background-color: #e0e0e0;
+      padding: 80px; 
+      width: 80%; 
+      max-width: 800px; 
+      border-radius: 10px; 
+    }
+    .email-container h1, p {
+      margin: 0 0 20px 0; 
+    }
+    .back-button {
+      margin-top: 40px; 
+      padding: 20px; 
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px; 
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <h1>Subject: <%= email.subject %></h1>
+    <p>Sender: <%= email.senderName %></p>
+    <p>Body: <%= email.body %></p>
+    <br>
+    <% if (email.attachment) { %>
+      <a href="<%= email.attachment %>">Download attachment</a>
+    <% } %>
+    <a href="javascript:history.back()" class="back-button">Back</a>
+  </div>
+</body>
+</html>
+

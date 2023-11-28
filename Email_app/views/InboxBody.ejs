@@ -1,0 +1,76 @@
+<style>
+  .email {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  min-width: 300px; 
+}
+  .email div {
+    flex: 1;
+    text-align: left;
+  }
+  .email a {
+    background-color: #f0f0f0; 
+    color: black; 
+  }
+  .page-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-nav a {
+    text-decoration: none;
+    color: black;
+  }
+  button {
+  background-color: #f08080; 
+  color: white;
+  z-index: 2; 
+  }
+  button:hover {
+    background-color: #45a049; 
+  }
+</style>
+<script>
+  function deleteEmails() {
+    const checkboxes = document.querySelectorAll('.email input[type="checkbox"]');
+    const emailIds = Array.from(checkboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value);
+    fetch('/api/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ emailIds }),
+    })
+    .then(response => response.text())
+    .then(message => {
+      alert(message);
+      location.reload();
+    })
+    .catch(error => console.error('Error:', error));
+  }
+  </script>
+  
+<button onclick="deleteEmails()">Delete</button>
+<% emails.forEach(email => { %>
+  <div class="email">
+    <div><input type="checkbox" value="<%= email.id %>"></div>
+    <div><%= email.senderName %></div>
+    <div><a href="/email/<%= email.id %>"><%= email.subject %></a></div>
+    <div><%= email.timestamp %></div>
+  </div>
+<% }); %>
+<div class="page-nav">
+  <a href="/inbox?page=<%= page - 1 %>" <%= page === 1 ? 'style="pointer-events: none; color: #ccc;"' : '' %>>←</a>
+  <% for(let i = 1; i <= pageCount; i++) { %>
+    <a href="/inbox?page=<%= i %>"><%= i %></a>
+  <% } %>
+  <a href="<%= page < pageCount ? '/inbox?page=' + (page + 1) : '#' %>" <%= page === pageCount ? 'style="pointer-events: none; color: #ccc;"' : '' %>>→</a>
+</div>

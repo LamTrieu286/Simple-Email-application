@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 50px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      input, a {
+        border-radius: 5px;
+      }
+      input[type="text"], input[type="email"], input[type="password"] {
+        width: 200px;
+        height: 30px;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border: none;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      a {
+        text-decoration: none;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      a:hover {
+        background-color: #45a049;
+      }
+      h1 {
+        font-size: 4em;
+        color: rgb(109, 109, 121);
+        
+      }
+      .error {
+      color: red;
+      }
+
+    </style>
+    <script>
+      function validateForm() {
+        const name = document.forms["signup"]["name"].value;
+        const email = document.forms["signup"]["email"].value;
+        const password = document.forms["signup"]["password"].value;
+        const confirmPassword = document.forms["signup"]["confirmPassword"].value;
+
+        const errorElement = document.getElementById('error');
+
+        if (name == "" || email == "" || password == "" || confirmPassword == "") {
+          errorElement.innerText = "All fields must be filled out";
+          return false;
+        }
+
+        if (password.length < 6) {
+          errorElement.innerText = "Password must be at least 6 characters long";
+          return false;
+        }
+
+        if (password != confirmPassword) {
+          errorElement.innerText = "Passwords do not match";
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sign Up</h1>
+      <p id="error" style="color:red;"></p>
+      <form name="signup" action="/signup" onsubmit="return validateForm()" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+        <input type="submit" value="Sign Up">
+      </form>
+      <% if (typeof message !== 'undefined') { %>
+        <p class="<%= messageType %>"><%= message %></p>
+      <% } %>
+      <p>Already have an account? <a href="/">Sign In</a></p>
+    </div>
+  </body>
+</html>

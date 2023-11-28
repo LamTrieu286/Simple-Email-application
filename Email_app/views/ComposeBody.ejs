@@ -1,0 +1,16 @@
+<form name="compose" action="/compose" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    <select name="recipient" required>
+      <option value="">Select recipient</option>
+      <% users.forEach(user => { %>
+        <option value="<%= user.id %>"><%= user.fullname %></option>
+      <% }); %>
+    </select>
+    <input type="text" name="subject" placeholder="Subject">
+    <textarea name="body" placeholder="Body"></textarea>
+    <input type="file" name="attachment">
+    <input type="submit" value="Send">
+  </form>
+  <% if (typeof message !== 'undefined') { %>
+    <p><%= message %></p>
+  <% } %>
+  
